@@ -10,6 +10,8 @@ namespace Domain
         public string LastName { get; private set; } = string.Empty;
         public string Email { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
+        public string FullName => $"{FirstName} {LastName}";
+
 
         public PersonEntity(string code, string firstName, string lastName, string email, string phoneNumber)
         {
@@ -26,6 +28,22 @@ namespace Domain
             Email = email.Trim().ToLower();
             PhoneNumber = phoneNumber.Trim();
         }
+
+
+        public void UpdatePersonalInfo(string firstName, string lastName, string email, string phoneNumber)
+        {
+            ValidateFirstName(firstName);
+            ValidateLastName(lastName);
+            ValidateEmail(email);
+            ValidatePhoneNumber(phoneNumber);
+
+            FirstName = firstName.Trim();
+            LastName = lastName.Trim();
+            Email = email.Trim().ToLower();
+            PhoneNumber = phoneNumber.Trim();
+        }
+
+
 
         private void ValidateCode(string code)
         {
