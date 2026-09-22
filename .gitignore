@@ -30,6 +30,7 @@ packages/
 ############################
 # VS Code
 ############################
+.VS/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
