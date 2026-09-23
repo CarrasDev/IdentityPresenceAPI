@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aplication.UseCases.Persons
+namespace Application.UseCases.Persons
 {
     public class DeletePersonUseCase
     {

@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="Aplication/Aplication.csproj" Id="273eefd8-576a-4b3b-96ff-758a4ee4d182" />
+  <Project Path="Aplication/Application.csproj" Id="273eefd8-576a-4b3b-96ff-758a4ee4d182" />
   <Project Path="Domain/Domain.csproj" />
 </Solution>

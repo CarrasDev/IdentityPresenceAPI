@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aplication.DTOs.Person
+namespace Application.DTOs.Person
 {
     public class CreatePersonDto
     {
