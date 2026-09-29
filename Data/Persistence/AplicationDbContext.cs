@@ -15,6 +15,7 @@ namespace Data.Persistence
 
         public DbSet<PersonEntity> Persons { get; set; }
 
+        // Definimos como EF Core construye la tabla en BBDD
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -63,9 +64,11 @@ namespace Data.Persistence
             });
         }
 
+
+        // Definimos qué pasa justo antes de guardar en la tabla de BBDD.
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            // Sobreescribimos para poder añadir caracteristicas extras.
+            // Sobreescribimos para poder añadir caracteristicas extras antes de tocar la base de datos.            
             return base.SaveChangesAsync(cancellationToken);
         }
 
