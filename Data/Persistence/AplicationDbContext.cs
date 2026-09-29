@@ -63,6 +63,11 @@ namespace Data.Persistence
             });
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // Sobreescribimos para poder añadir caracteristicas extras.
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
 
     }
