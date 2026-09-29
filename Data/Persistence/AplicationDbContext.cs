@@ -68,8 +68,22 @@ namespace Data.Persistence
         // Definimos qué pasa justo antes de guardar en la tabla de BBDD.
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            // Sobreescribimos para poder añadir caracteristicas extras antes de tocar la base de datos.            
+            UpdateTimestamps();
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateTimestamps()
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Modified);
+
+            foreach (var entry in entries)
+            {
+                if (entry.Metadata.FindProperty("UpdateAt") != null)
+                {
+                    entry.Property("UpdateAt").CurrentValue = DateTime.UtcNow;
+                }
+            }
         }
 
 
