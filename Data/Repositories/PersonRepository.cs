@@ -19,10 +19,29 @@ namespace Data.Repositories
 
         public async Task<PersonEntity?> GetByIdAsync(Guid id)
         {
-            return await _context.Persons.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Persons
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<IEnumerable<PersonEntity>> GetAllAsync()
+        {
+            return await _context.Persons
+                .AsNoTracking()                 // TODO: Consider using AsNoTracking for read-only queries to improve performance
+                .OrderBy(p => p.FirstName)
+                .ThenBy(p => p.LastName)
+                .ToListAsync();
+        }
 
+        public async Task AddAsync(PersonEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            await _context.Persons.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
 
 
 
