@@ -42,6 +42,21 @@ namespace Data.Repositories
             await _context.Persons.AddAsync(entity);
         }
 
+        // TODO: _context.Persons.Update(entity) es sincrono en EF, con lo cual trabajamos simulando asincronia haciendo uso de return Task.CompletedTask.
+        public Task UpdateAsync(PersonEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            _context.Persons.Update(entity);  // no podemos usar await en este punto por no ser un metodo asincrono, EF Core maneja la actualización de manera sincrona.
+            return Task.CompletedTask;
+
+            // NOTA:    Update(entity) solamente marca la entidad como modificada en el CangeTracker de EF por este motivo no tiene necesidad de ser asincrono.
+            //          EF Core no realiza la actualización en la base de datos hasta que se llama a SaveChangesAsync() en el contexto, lo cual es asincrono.
+
+        }
+
 
 
 
