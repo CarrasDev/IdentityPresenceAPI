@@ -40,8 +40,9 @@ namespace Data.Repositories
             }
 
             await _context.Persons.AddAsync(entity);
-            await _context.SaveChangesAsync();
         }
+
+
 
 
 
