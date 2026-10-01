@@ -57,10 +57,20 @@ namespace Data.Repositories
 
         }
 
+        public Task DeleteAsync(PersonEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
 
+            _context.Persons.Remove(entity);  // no podemos usar await en este punto por no ser un metodo asincrono, EF Core maneja la eliminación de manera sincrona.
+            return Task.CompletedTask;
+        }
 
-
-
-
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
     }
 }
