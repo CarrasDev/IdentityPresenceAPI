@@ -8,7 +8,8 @@ using System.Text;
 
 namespace Data.Repositories
 {
-    public class PersonRepository : IRepository<PersonEntity, Guid>
+    public class PersonRepository : IRepository<PersonEntity, Guid>,
+                                    ICodeRepository<PersonEntity>
     {
         private readonly AplicationDbContext _context;
 
@@ -26,7 +27,7 @@ namespace Data.Repositories
         public async Task<IEnumerable<PersonEntity>> GetAllAsync()
         {
             return await _context.Persons
-                .AsNoTracking()                 // TODO: Consider using AsNoTracking for read-only queries to improve performance
+                .AsNoTracking()                 // TODO: Sin traking mejora el rendimiento de las consultas de solo lectura al evitar el seguimiento de cambios en las entidades recuperadas.
                 .OrderBy(p => p.FirstName)
                 .ThenBy(p => p.LastName)
                 .ToListAsync();
@@ -71,6 +72,35 @@ namespace Data.Repositories
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
+        }
+
+
+        // ******************************
+        // ICodeRepository implementation
+        // ******************************
+
+        public async Task<PersonEntity?> GetByCodeAsync(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                throw new ArgumentException("El código no puede estar vacío", nameof(code));
+            }
+
+            var normalizedCode = code.ToUpperInvariant();
+
+            return await _context.Persons.FirstOrDefaultAsync(p => p.Code == normalizedCode);
+        }
+
+        public async Task<bool> ExistsWithCodeAsync(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                throw new ArgumentException("El código no puede estar vacío", nameof(code));
+            }
+
+            var normalizedCode = code.ToUpperInvariant();
+
+            return await _context.Persons.AnyAsync(p => p.Code == normalizedCode);
         }
     }
 }
