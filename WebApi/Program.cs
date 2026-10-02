@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // En AddData() se registran los repositorios de la capa de datos, para que puedan ser inyectados en los casos de uso.
 // Se ha implementado haciendo uso de la extensión de métodos, Usando el paquete Microsoft.Extensions.DependencyInjection.Abstractions,
