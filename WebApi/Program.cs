@@ -17,7 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Se ha implementado haciendo uso de la extensión de métodos, Usando el paquete Microsoft.Extensions.DependencyInjection.Abstractions,
 // que permite agregar servicios a la colección de servicios de la aplicación.
 // De esta manera podemos centralizar las dependencias de la capa de datos en un solo lugar.
-builder.Services.AddData();
+builder.Services.AddData(connectionString);
 // builder.Services.AddScoped<IRepository<PersonEntity, Guid>, PersonRepository>();
 // builder.Services.AddScoped<ICodeRepository<PersonEntity>, PersonRepository>();
 
