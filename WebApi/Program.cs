@@ -45,21 +45,3 @@ app.UseHttpsRedirection();
 
 
 app.Run();
-
-
-
-// Concepto de extensión de métodos en C#, al  estilo de AL en Business Central.
-// Creamos el método de extensión Hi() para la clase string.
-/*
-string name = "juan";
-
-Console.WriteLine(name.Hi());
-
-static class StringExtensions
-{
-    public static string Hi(this string str)
-    {
-        return "Hola " + str;
-    }
-}
-*/
