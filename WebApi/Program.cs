@@ -3,6 +3,7 @@ using Data;
 using Data.Repositories;
 using Domain;
 using Domain.Abstractions;
+using WebApi.EndPoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,8 +41,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-
-
+app.MapPersonsEndpoints();
 
 app.Run();
