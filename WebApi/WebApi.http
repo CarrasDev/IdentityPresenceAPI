@@ -1,6 +1,16 @@
 @WebApi_HostAddress = http://localhost:5272
 
-GET {{WebApi_HostAddress}}/api/persons/00000000-0000-0000-0000-000000000000
+GET {{WebApi_HostAddress}}/api/persons/CC308B75-CC20-49A3-8E86-EE7D4D2C1F5E
 Accept: application/json
 
 ###
+POST {{WebApi_HostAddress}}/api/persons
+Content-Type: application/json
+
+{
+  "code": "123456",
+  "firstName": "Jesús",
+  "lastName": "Pérez",
+  "email": "jesus.perez@example.com",
+  "phoneNumber": "1234567890"
+}

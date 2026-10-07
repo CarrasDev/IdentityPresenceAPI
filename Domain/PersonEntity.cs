@@ -57,28 +57,28 @@ namespace Domain
                 throw new ArgumentException("El código no puede tener más de 20 caracteres", nameof(code));
         }
 
-        private void ValidateFirstName(string firsName)
+        private void ValidateFirstName(string firstName)
         {
-            if (string.IsNullOrWhiteSpace(FirstName))
-                throw new ArgumentException("El nombre no puede estar vacío", nameof(FirstName));
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("El nombre no puede estar vacío", nameof(firstName));
 
-            if (FirstName.Trim().Length < 2)
-                throw new ArgumentException("El nombre debe tener al menos 2 caracteres", nameof(FirstName));
+            if (firstName.Trim().Length < 2)
+                throw new ArgumentException("El nombre debe tener al menos 2 caracteres", nameof(firstName));
 
-            if (FirstName.Trim().Length > 50)
-                throw new ArgumentException("El nombre no puede tener más de 50 caracteres", nameof(FirstName));
+            if (firstName.Trim().Length > 50)
+                throw new ArgumentException("El nombre no puede tener más de 50 caracteres", nameof(firstName));
         }
 
         private void ValidateLastName(string lastName)
         {
-            if (string.IsNullOrWhiteSpace(LastName))
-                throw new ArgumentException("El apellido no puede estar vacío", nameof(LastName));
+            if (string.IsNullOrWhiteSpace(lastName))
+                throw new ArgumentException("El apellido no puede estar vacío", nameof(lastName));
             
-            if (LastName.Trim().Length < 2)
-                throw new ArgumentException("El apellido debe tener al menos 2 caracteres", nameof(LastName));
+            if (lastName.Trim().Length < 2)
+                throw new ArgumentException("El apellido debe tener al menos 2 caracteres", nameof(lastName));
            
-            if (LastName.Trim().Length > 50)
-                throw new ArgumentException("El apellido no puede tener más de 50 caracteres", nameof(LastName));
+            if (lastName.Trim().Length > 50)
+                throw new ArgumentException("El apellido no puede tener más de 50 caracteres", nameof(lastName));
         }
 
 
