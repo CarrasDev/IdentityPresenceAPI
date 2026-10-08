@@ -14,3 +14,8 @@ Content-Type: application/json
   "email": "jesus.perez@example.com",
   "phoneNumber": "1234567890"
 }
+
+###
+GET {{WebApi_HostAddress}}/api/persons
+Accept: application/json
+

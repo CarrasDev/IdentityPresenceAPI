@@ -50,13 +50,28 @@ namespace WebApi.EndPoints
                 }
             }).WithName("CreatePerson")
               .WithSummary("Creates a new person.")
-              .WithDescription("Creates a new person with the provided details. Returns 201 if the person is successfully created, or 400 if there is a validation error.")
+              .WithDescription("Creates a new person with the provided details. Returns 201 if the person is successfully created,or 400 if there is a validation error.")
               .Produces(StatusCodes.Status201Created)
               .Produces(StatusCodes.Status400BadRequest)
               .Produces(StatusCodes.Status500InternalServerError);
 
 
-
+            group.MapGet("/", async (GetAllPersonsUseCase useCase) =>
+            {
+                try
+                {
+                    var persons = await useCase.ExecuteAsync();
+                    return Results.Ok(persons);                                     // Status 200 OK
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(ex.Message);                // Status 500 Internal Server Error
+                }
+            }).WithName("GetAllPersons")
+              .WithSummary("Gets all persons.")
+              .WithDescription("Retrieves a list of all persons. Returns 200 if the list is successfully retrieved.")
+              .Produces(StatusCodes.Status200OK)
+              .Produces(StatusCodes.Status500InternalServerError);
 
 
 
