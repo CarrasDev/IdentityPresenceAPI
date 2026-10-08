@@ -8,11 +8,11 @@ POST {{WebApi_HostAddress}}/api/persons
 Content-Type: application/json
 
 {
-  "code": "123456",
-  "firstName": "Jesús",
-  "lastName": "Pérez",
-  "email": "jesus.perez@example.com",
-  "phoneNumber": "1234567890"
+  "code": "789012",
+  "firstName": "Carmen",
+  "lastName": "Sandiego",
+  "email": "carmen.sandiego@example.com",
+  "phoneNumber": "5647382910"
 }
 
 ###
@@ -30,3 +30,8 @@ Content-Type: application/json
   "email": "daniel.carrasco@example.com",
   "phoneNumber": "0987654321"
 }
+
+###
+DELETE {{WebApi_HostAddress}}/api/persons/A20337FA-08E6-493B-A458-44D7084EA922
+
+###

@@ -107,6 +107,32 @@ namespace WebApi.EndPoints
               .Produces(StatusCodes.Status500InternalServerError);
 
 
+            group.MapDelete("/{id:guid}", async (Guid id, DeletePersonUseCase useCase) =>
+            {
+                try
+                {
+                    await useCase.ExecuteAsync(id);
+                    return Results.NoContent();                                      // Status 204 No Content
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.NotFound(new { error = ex.Message });             // Status 404 Not Found
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(ex.Message);                  // Status 500 Internal Server Error
+                }
+            }).WithName("DeletePerson")
+              .WithSummary("Deletes an existing person.")
+              .WithDescription("Deletes an existing person. Returns 204 if the deletion is successful, or 404 if the person is not found.")
+              .Produces(StatusCodes.Status204NoContent)
+              .Produces(StatusCodes.Status404NotFound)
+              .Produces(StatusCodes.Status500InternalServerError);
+
+
+
+
+
 
 
 
