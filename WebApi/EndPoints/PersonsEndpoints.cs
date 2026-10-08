@@ -46,7 +46,7 @@ namespace WebApi.EndPoints
                 }
                 catch (Exception ex)
                 {
-                    return Results.InternalServerError(ex.Message);                 // Status 500 Internal Server Error
+                    return Results.InternalServerError(new { error = ex.Message }); // Status 500 Internal Server Error
                 }
             }).WithName("CreatePerson")
               .WithSummary("Creates a new person.")
@@ -65,7 +65,7 @@ namespace WebApi.EndPoints
                 }
                 catch (Exception ex)
                 {
-                    return Results.InternalServerError(ex.Message);                // Status 500 Internal Server Error
+                    return Results.InternalServerError(new { error = ex.Message }); // Status 500 Internal Server Error
                 }
             }).WithName("GetAllPersons")
               .WithSummary("Gets all persons.")
@@ -96,7 +96,7 @@ namespace WebApi.EndPoints
                 }
                 catch (Exception ex)
                 {
-                    return Results.InternalServerError(ex.Message);                  // Status 500 Internal Server Error
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
                 }
             }).WithName("UpdatePerson")
               .WithSummary("Updates an existing person.")
@@ -120,7 +120,7 @@ namespace WebApi.EndPoints
                 }
                 catch (Exception ex)
                 {
-                    return Results.InternalServerError(ex.Message);                  // Status 500 Internal Server Error
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
                 }
             }).WithName("DeletePerson")
               .WithSummary("Deletes an existing person.")
@@ -130,10 +130,27 @@ namespace WebApi.EndPoints
               .Produces(StatusCodes.Status500InternalServerError);
 
 
-
-
-
-
+            group.MapGet("/code/{code}", async (string code, GetPersonByCodeUseCase useCase) =>
+            {
+                try
+                {
+                    var person = await useCase.ExecuteAsync(code);
+                    return Results.Ok(person);                                       // Status 200 OK
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.NotFound(new { error = ex.Message });             // Status 404 Not Found
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
+                }
+            }).WithName("GetPersonByCode")
+              .WithSummary("Gets a person by code.")
+              .WithDescription("Gets a person by their unique code. Returns 200 if the person is found, or 404 if the person is not found.")
+              .Produces(StatusCodes.Status200OK)
+              .Produces(StatusCodes.Status404NotFound)
+              .Produces(StatusCodes.Status500InternalServerError);
 
 
         }

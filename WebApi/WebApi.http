@@ -35,3 +35,7 @@ Content-Type: application/json
 DELETE {{WebApi_HostAddress}}/api/persons/A20337FA-08E6-493B-A458-44D7084EA922
 
 ###
+GET {{WebApi_HostAddress}}/api/persons/code/ABC123
+Accept: application/json
+
+###
