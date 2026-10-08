@@ -19,3 +19,14 @@ Content-Type: application/json
 GET {{WebApi_HostAddress}}/api/persons
 Accept: application/json
 
+###
+PUT {{WebApi_HostAddress}}/api/persons/CC308B75-CC20-49A3-8E86-EE7D4D2C1F5E
+Content-Type: application/json
+
+{
+  "id": "CC308B75-CC20-49A3-8E86-EE7D4D2C1F5E",
+  "firstName": "Daniel",
+  "lastName": "Carrasco",
+  "email": "daniel.carrasco@example.com",
+  "phoneNumber": "0987654321"
+}

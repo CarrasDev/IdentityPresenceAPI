@@ -74,6 +74,40 @@ namespace WebApi.EndPoints
               .Produces(StatusCodes.Status500InternalServerError);
 
 
+            group.MapPut("/{id:guid}", async (Guid id, UpdatePersonDto dto, UpdatePersonUseCase useCase) =>
+            {
+                if (id != dto.Id)
+                {
+                    return Results.BadRequest("ID in the URL does not match ID in the request body."); // Status 400 Bad Request
+                }
+
+                try
+                {
+                    var person = await useCase.ExecuteAsync(dto);
+                    return Results.Ok(person);                                       // Status 200 OK
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.NotFound(new { error = ex.Message });             // Status 404 Not Found
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });           // Status 400 Bad Request
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(ex.Message);                  // Status 500 Internal Server Error
+                }
+            }).WithName("UpdatePerson")
+              .WithSummary("Updates an existing person.")
+              .WithDescription("Updates the details of an existing person. Returns 200 if the update is successful, 400 if there is a validation error, or 404 if the person is not found.")
+              .Produces(StatusCodes.Status200OK)
+              .Produces(StatusCodes.Status400BadRequest)
+              .Produces(StatusCodes.Status404NotFound)
+              .Produces(StatusCodes.Status500InternalServerError);
+
+
+
 
 
         }
