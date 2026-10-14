@@ -11,9 +11,9 @@ namespace Data.Repositories
     public class PersonRepository : IRepository<PersonEntity, Guid>,
                                     ICodeRepository<PersonEntity>
     {
-        private readonly AplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PersonRepository(AplicationDbContext context)
+        public PersonRepository(ApplicationDbContext context)
         {
             _context = context;
         }

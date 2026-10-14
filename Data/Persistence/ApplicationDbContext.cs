@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Data.Persistence
 {
-    public class AplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public AplicationDbContext(DbContextOptions<AplicationDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
@@ -29,6 +29,7 @@ namespace Data.Persistence
                 entity.ToTable("Persons");
                 
                 entity.HasKey(e => e.Id);               // PK
+
                 entity.Property(e => e.Id)
                       .IsRequired()
                       .ValueGeneratedOnAdd();
