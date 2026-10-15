@@ -15,7 +15,7 @@ namespace Data.Repositories
 
         public PersonRepository(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<PersonEntity?> GetByIdAsync(Guid id)
