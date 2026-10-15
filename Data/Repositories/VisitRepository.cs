@@ -54,6 +54,18 @@ namespace Data.Repositories
             return Task.CompletedTask;                                  // Importante indicar que la tarea ha finalizado.
         }
 
+        public Task DeleteAsync(VisitEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            _context.Visits.Remove(entity);
+            return Task.CompletedTask;                                  // Importante indicar que la tarea ha finalizado.
+        }
+
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
