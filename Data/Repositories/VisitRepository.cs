@@ -33,6 +33,31 @@ namespace Data.Repositories
                         .ToListAsync();
         }
 
+        public async Task AddAsync(VisitEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            await _context.Visits.AddAsync(entity);
+        }        
+
+        public Task UpdateAsync(VisitEntity entity)                     //Asincronia simulada. UpdateAsync no es realmente asincrono.
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            _context.Visits.Update(entity);
+            return Task.CompletedTask;                                  // Importante indicar que la tarea ha finalizado.
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
 
 
 
