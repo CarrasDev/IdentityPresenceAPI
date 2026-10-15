@@ -14,11 +14,13 @@ namespace Data
     {
         public static IServiceCollection AddData(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<AplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository<PersonEntity, Guid>, PersonRepository>();
             services.AddScoped<ICodeRepository<PersonEntity>, PersonRepository>();
+            services.AddScoped<IRepository<VisitEntity, Guid>, VisitRepository>();
+            services.AddScoped<IVisitRepository<VisitEntity>, VisitRepository>();
 
             return services;
         }
