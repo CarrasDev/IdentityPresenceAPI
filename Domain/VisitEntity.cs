@@ -16,6 +16,7 @@ namespace Domain
         public bool isActive => ExitTime == null;
         public TimeSpan? Duration => ExitTime.HasValue ? ExitTime.Value - EntryTime : null;
 
+        private VisitEntity() { } // Constructor privado para EF Core
 
 
         public VisitEntity(Guid personId, DateTime? entryTime = null)

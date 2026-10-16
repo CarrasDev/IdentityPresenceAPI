@@ -87,7 +87,7 @@ namespace Data.Persistence
                     .IsRequired();
 
                 entity.Property(e => e.ExitTime)
-                    .IsRequired();
+                    .IsRequired(false);
 
                 entity.Ignore(e => e.isActive);
                 entity.Ignore(e => e.Duration);
