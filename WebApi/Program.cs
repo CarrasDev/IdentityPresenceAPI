@@ -49,5 +49,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapPersonsEndpoints();
+app.MapVisitsEndpoints();
 
 app.Run();
