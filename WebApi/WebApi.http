@@ -43,3 +43,39 @@ Accept: application/json
 
 GET {{WebApi_HostAddress}}/api/visits
 Content-Type: application/json
+
+
+### Register entry by PersonId
+POST {{WebApi_HostAddress}}/api/visits/entry
+Content-Type: application/json
+
+{
+  "personId": "CC308B75-CC20-49A3-8E86-EE7D4D2C1F5E",
+  "entryTime": null
+}
+
+###
+POST {{WebApi_HostAddress}}/api/visits/entry
+Content-Type: application/json
+
+{
+  "personId": "00000000-0000-0000-0000-000000000000",
+  "entryTime": null
+}
+
+### Register entry by Code
+POST {{WebApi_HostAddress}}/api/visits/entry
+Content-Type: application/json
+
+{
+  "code": "789012",
+  "entryTime": null
+}
+
+
+
+
+
+
+
+

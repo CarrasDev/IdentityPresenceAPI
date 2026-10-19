@@ -1,4 +1,5 @@
-﻿using Application.UseCases.Visits;
+﻿using Application.DTOs.Visits;
+using Application.UseCases.Visits;
 
 namespace WebApi.EndPoints
 {
@@ -25,6 +26,36 @@ namespace WebApi.EndPoints
               .WithDescription("Retrieves a list of all visits from the system.")
               .Produces(StatusCodes.Status200OK)
               .Produces(StatusCodes.Status500InternalServerError);
+
+
+            group.MapPost("/entry", async (RegisterEntryDto dto, RegisterEntryUseCase useCase) =>
+            {
+                try
+                {
+                    var visit = await useCase.ExecuteAsync(dto);
+                    return Results.Created($"/api/visits/{visit.Id}", visit);       // Status 201 Created
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });          // Status 400 Bad Request
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });          // Status 400 Bad Request
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
+                }
+            }).WithName("RegisterEntry")
+              .WithSummary("Register a new visit entry")
+              .WithDescription("Registers a new visit entry in the system (PersonId or Code).")
+              .Produces(StatusCodes.Status201Created)
+              .Produces(StatusCodes.Status400BadRequest)
+              .Produces(StatusCodes.Status500InternalServerError);
+
+
+
 
 
 
