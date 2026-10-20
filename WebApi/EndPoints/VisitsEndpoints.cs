@@ -73,8 +73,22 @@ namespace WebApi.EndPoints
               .Produces(StatusCodes.Status500InternalServerError);
 
 
-
-
+            group.MapGet("/person/{personId:guid}", async (Guid personId, GetVisitsByPersonUseCase useCase) =>
+            {
+                try
+                {
+                    var visits = await useCase.ExecuteAsync(personId);
+                    return Results.Ok(visits);                                       // Status 200 OK
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
+                }
+            }).WithName("GetVisitsByPerson")
+              .WithSummary("Get visits by person")
+              .WithDescription("Retrieves a list of all visits associated with a specific person.")
+              .Produces(StatusCodes.Status200OK)
+              .Produces(StatusCodes.Status500InternalServerError);
 
 
         }

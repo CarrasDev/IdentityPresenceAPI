@@ -70,6 +70,7 @@ GET {{WebApi_HostAddress}}/api/visits/active
 Accept: application/json
 
 
-
-
+### Get Visit History by Person
+GET {{WebApi_HostAddress}}/api/visits/person/cc308b75-cc20-49a3-8e86-ee7d4d2c1f5e
+Accept: application/json
 
