@@ -74,3 +74,20 @@ Accept: application/json
 GET {{WebApi_HostAddress}}/api/visits/person/cc308b75-cc20-49a3-8e86-ee7d4d2c1f5e
 Accept: application/json
 
+### Register Exit by VisitId
+POST {{WebApi_HostAddress}}/api/visits/exit/
+Content-Type: application/json
+
+{
+  "visitId": "f79066f2-5067-4a79-9453-9845c2bc9a06",
+  "exitTime": null
+}
+
+### Register Exit by Code
+POST {{WebApi_HostAddress}}/api/visits/exit/
+Content-Type: application/json
+
+{
+  "code": "789012",
+  "exitTime": null
+}

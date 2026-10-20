@@ -91,6 +91,32 @@ namespace WebApi.EndPoints
               .Produces(StatusCodes.Status500InternalServerError);
 
 
+            group.MapPost("/exit", async (RegisterExitDto dto, RegisterExitUseCase useCase) =>
+            {
+                try
+                {
+                    var visit = await useCase.ExecuteAsync(dto);
+                    return Results.Ok(visit);                                        // Status 200 OK
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });          // Status 400 Bad Request
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });          // Status 400 Bad Request
+                }
+                catch (Exception ex)
+                {
+                    return Results.InternalServerError(new { error = ex.Message });  // Status 500 Internal Server Error
+                }
+            }).WithName("RegisterExit")
+              .WithSummary("Register a visit exit")
+              .WithDescription("Registers the exit of a visit in the system (VisitId or Code).")
+              .Produces(StatusCodes.Status200OK)
+              .Produces(StatusCodes.Status400BadRequest)
+              .Produces(StatusCodes.Status500InternalServerError);
+
         }
 
     }
