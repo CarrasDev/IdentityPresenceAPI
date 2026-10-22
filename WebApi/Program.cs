@@ -4,6 +4,8 @@ using Data;
 using Data.Repositories;
 using Domain;
 using Domain.Abstractions;
+using Microsoft.OpenApi;
+using System.Reflection;
 using WebApi.EndPoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,21 @@ builder.Services.AddOpenApi();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
+    {
+        Title = "Identity & Presence API",
+        Version = "v1",
+        Description = "This API provides identity management, presence tracking, and activity registration for people accessing controlled environments.",
+        Contact = new OpenApiContact
+        {
+            Name = "Daniel Carrasco - CarrasDev",
+            Email = "carrasdev@example.com",
+            Url = new Uri("https://www.carrasdev.com")
+        }
+    });
+});
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
