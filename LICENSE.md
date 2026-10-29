@@ -1,6 +1,6 @@
 ## Creative Commons Attribution-NonCommercial 4.0 International License
 
-Copyright (c) 2026 Daniel Carrasco
+Copyright (c) 2026 Daniel Carrasco - CarrasDev
 
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
 
