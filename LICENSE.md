@@ -1,4 +1,4 @@
-## Creative Commons Attribution-NonCommercial 4.0 International License
+## Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)
 
 Copyright (c) 2026 Daniel Carrasco - CarrasDev
 
